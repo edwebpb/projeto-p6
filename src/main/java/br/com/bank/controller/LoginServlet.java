@@ -31,11 +31,6 @@ public class LoginServlet extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("admin/login.jsp");
 			rd.forward(request, response);
 		}
-		if (action.equals("/lista")) {
-			System.out.println("Lista ");
-			RequestDispatcher rd = request.getRequestDispatcher("pages/contatos/list_contatos.jsp");
-			rd.forward(request, response);
-		}
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -51,7 +46,7 @@ public class LoginServlet extends HttpServlet {
 			
 			} else {
 				RequestDispatcher rd = request.getRequestDispatcher("error.jsp");
-				request.setAttribute("error", "Erro, usuário/senha incorreto(a)!");
+				request.setAttribute("error", "Usuário/senha incorreto(a)!");
 				rd.forward(request, response);
 			}
 		

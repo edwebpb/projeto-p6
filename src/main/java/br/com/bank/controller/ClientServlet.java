@@ -25,6 +25,13 @@ public class ClientServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		String action = request.getServletPath();
+		if (action.equals("/listar")) {
+			List<Client> clients = this.service.getAll();
+			request.setAttribute("clients", clients);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("pages/contatos/list_contatos.jsp");
+			dispatcher.forward(request, response);
+		}
 		response.getWriter().append("Response to client").append(request.getContextPath());
 	}
 
@@ -62,7 +69,7 @@ public class ClientServlet extends HttpServlet {
 		} else if (action.equals("/editar")) {
 			String email = request.getParameter("email");
 			Client client = this.service.getClient(email);
-			RequestDispatcher rd = request.getRequestDispatcher("alterar.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("editar.jsp");
 			request.setAttribute("id", client.getId());
 			request.setAttribute("name", client.getName());
 			request.setAttribute("email", client.getEmail());
@@ -88,15 +95,15 @@ public class ClientServlet extends HttpServlet {
 				
 				List<Client> clients = this.service.getAll();
 				request.setAttribute("clients", clients);
-				RequestDispatcher dispatcher = request.getRequestDispatcher("client-lista.jsp");
-				request.setAttribute("msg", "Sucesso! Usu√°rio alterado.");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("pages/contatos/list_contatos.jsp");
+				request.setAttribute("sucess", "Sucesso! Usu·rio alterado.");
 				dispatcher.forward(request, response);
 			
 		} else if (action.equals("/listar")) {
 
 			List<Client> clients = this.service.getAll();
 			request.setAttribute("clients", clients);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("client-lista.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("pages/contatos/list_contatos.jsp");
 			dispatcher.forward(request, response);
 
 		} else {
@@ -118,13 +125,13 @@ public class ClientServlet extends HttpServlet {
 				// SALVAR O MEU CLIENT
 				this.service.save(client);
 
-				RequestDispatcher rd = request.getRequestDispatcher("success.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("pages/contatos/add_contatos.jsp");
 				request.setAttribute("sucess", "Sucesso!");
 				request.setAttribute("user", name);
 				rd.forward(request, response);
 			} else {
-				RequestDispatcher rd = request.getRequestDispatcher("error.jsp");
-				request.setAttribute("error", "Erro, usu√°rio/phone j√° cadastrado");
+				RequestDispatcher rd = request.getRequestDispatcher("pages/contatos/add_contatos.jsp");
+				request.setAttribute("erro", "Erro! J· existe um cadastro com estes dados");
 				rd.forward(request, response);
 			}
 		}
