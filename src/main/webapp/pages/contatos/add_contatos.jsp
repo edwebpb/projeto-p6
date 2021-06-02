@@ -9,49 +9,50 @@
           <div class="row">
             <div class="col-md-12">
               <div class="card">
-                <div class="card-header card-header-primary">
+                <div class="card-header card-header-info">
                   <h4 class="card-title">Cadastro de contato</h4>
                   <p class="card-category">Preencha seus dados</p>
                 </div>
                 <div class="card-body">
                 	<c:if test="${sucess != null}">
                 		<div class="alert alert-success">
-                    		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      		<i class="material-icons">close</i>
-                    		</button>
-                    		<span>
-                      		<b> Sucesso! - </b> Cadastro efetuado com sucesso!</span>
+                    		<span><b> ${sucess} </b></span>
+                  		</div>
+					</c:if>
+					<c:if test="${erro != null}">
+                		<div class="alert alert-danger">
+                    		<span><b>${erro}</b></span>
                   		</div>
 					</c:if>
                   <form action="${pageContext.request.contextPath}/salvar" method="post">
                     <div class="row">
                       
-                      <div class="col-md-12">
+                      <div class="col-md-6">
                         <div class="form-group">
                           <label class="bmd-label-floating">Nome</label>
                           <input type="text" name="name" class="form-control" maxlength="30" required="required">
                         </div>
                       </div>
-                      <div class="col-md-12">
+                      <div class="col-md-6">
                         <div class="form-group">
                           <label class="bmd-label-floating">Email</label>
                           <input type="email" name="email" class="form-control" maxlength="50" required="required">
                         </div>
                       </div>
-                      <div class="col-md-12">
+                      <div class="col-md-6">
                         <div class="form-group">
                           <label class="bmd-label-floating">Fone</label>
                           <input type="text" name="phone" class="form-control" maxlength="50" required="required">
                         </div>
                       </div>
-                      <div class="col-md-12">
+                      <div class="col-md-6">
                         <div class="form-group">
                           <label class="bmd-label-floating">Senha</label>
                           <input type="password" name="password" class="form-control" maxlength="50" required="required">
                         </div>
                       </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Salvar</button>
+                    <button type="submit" class="btn btn-success">Salvar</button>
                     <div class="clearfix"></div>
                   </form>
                 </div>

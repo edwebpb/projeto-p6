@@ -14,16 +14,25 @@
                   <p class="card-category">Aqui está a lista de clientes cadastrados</p>
                 </div>
                 <div class="card-body">
-<div class="table-responsive">
-				<table class="table table-striped table-sm">
+                	<c:if test="${sucess != null}">
+                		<div class="alert alert-success">
+                    		<span><b> ${sucess} </b> </span>
+                  		</div>
+					</c:if>
+					<c:if test="${erro != null}">
+                		<div class="alert alert-danger">
+                    		<span><b>${erro}</b></span>
+                  		</div>
+					</c:if>
+			<div class="table-responsive">
+				<table class="table table-striped">
 					<thead>
 						<tr>
 							<th>ID</th>
 							<th>Nome</th>
 							<th>E-mail</th>
 							<th>Phone</th>
-							<th>Edit</th>
-							<th>Delete</th>
+							<th>Comando</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -36,13 +45,12 @@
 								<td>
 								<form action="editar" method="post">
 									<input type="hidden" name="email" value="${client.email}" />
-									<input type="submit" class="btn btn-primary btn-sm" value="Alterar" />
+									<button class="btn btn-info btn-block btn-sm" type="submit">Alterar</button>
 								</form>
-								</td>
-								<td>
+								
 								<form action="excluir" method="post">
 									<input type="hidden" name="id" value="${client.id}" />
-									<input type="submit" class="btn btn-danger btn-sm" value="Excluir" />
+									<button class="btn btn-danger btn-block btn-sm" type="submit">Excluir</button>
 								</form>
 								</td>
 							</tr>
